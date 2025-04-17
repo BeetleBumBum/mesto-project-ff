@@ -1,6 +1,6 @@
 import "./pages/index.css"; // добавьте импорт главного файла стилей 
 import {initialCards} from "./components/cards.js";
-import { addCard, likeCard, deleteCard } from "./components/card.js";
+import { createCard, likeCard, deleteCard } from "./components/card.js";
 import { openModal, closeModal } from "./components/modal.js";
 
 export const placesList = document.querySelector(".places__list");
@@ -9,7 +9,7 @@ export const placesList = document.querySelector(".places__list");
 
 function loadCards(cards) {
    cards.forEach((card) => {
-      placesList.append(addCard(card, deleteCard, likeCard, openImage));
+      placesList.append(createCard(card, deleteCard, likeCard, openImage));
    })
 };
 
@@ -20,16 +20,14 @@ loadCards(initialCards);
 const modalTypeImage = document.querySelector(".popup_type_image");
 const btnImageClose = document.querySelector(".popup_type_image .popup__close");
 
-export function openImage(evt) {
-   if (evt.target.classList.contains("card__image")) {
-      const modalImage = document.querySelector(".popup__image");
-      const modalImageText = document.querySelector(".popup__caption");
-      modalImage.src = evt.target.src;
-      modalImage.alt = evt.target.alt;
-      modalImageText.textContent = evt.target.alt;
-      openModal(modalTypeImage);
-   }
-  };
+export function openImage(name, link) {
+   const modalImage = document.querySelector(".popup__image");
+   const modalImageText = document.querySelector(".popup__caption");
+   modalImage.src = link;
+   modalImage.alt = name;
+   modalImageText.textContent = name;
+   openModal(modalTypeImage);
+};
 
 btnImageClose.addEventListener("click", function() {
    closeModal(modalTypeImage);
@@ -41,7 +39,6 @@ const modalInputName = document.querySelector(".popup__input_type_name");
 const modalInputJob = document.querySelector(".popup__input_type_description");
 const profileTitle = document.querySelector(".profile__title"); 
 const profileDescription = document.querySelector(".profile__description");
-const btnSubmit = document.querySelector(".submit__button");
 const modalTypeEdit = document.querySelector(".popup_type_edit");
 const btnEdit = document.querySelector(".profile__edit-button");
 const btnEditClose = document.querySelector(".popup_type_edit .popup__close");
@@ -52,26 +49,23 @@ function editModalInfo() {
    modalInputJob.value = profileDescription.textContent;
  };
 
-function handleFormSubmit(evt) {
+function renameProfileFormSubmit(evt) {
    evt.preventDefault();
    profileTitle.textContent = modalInputName.value;
    profileDescription.textContent = modalInputJob.value;
-   btnSubmit.addEventListener("click", function() {
-      closeModal(modalTypeEdit);
-   });
- };
+   closeModal(modalTypeEdit);
+};
 
 btnEdit.addEventListener("click", function() {
    openModal(modalTypeEdit);
+   editModalInfo();
 });
 
 btnEditClose.addEventListener("click", function() {
    closeModal(modalTypeEdit);
 });
- 
-btnEdit.addEventListener("click", editModalInfo);
 
-formElement.addEventListener("submit", handleFormSubmit);
+formElement.addEventListener("submit", renameProfileFormSubmit);
 
  // Форма добавления новой карточки
 
@@ -93,7 +87,7 @@ btnNewCardClose.addEventListener("click", function() {
 formNewPlace.addEventListener("submit", function(evt) {
    evt.preventDefault();
    const card = {name:formPlaceName.value, link:formLink.value};
-   const newCard = addCard(card, deleteCard, likeCard, openImage);
+   const newCard = createCard(card, deleteCard, likeCard, openImage);
    placesList.prepend(newCard);
    formNewPlace.reset();
    closeModal(modalTypeNewCard);
