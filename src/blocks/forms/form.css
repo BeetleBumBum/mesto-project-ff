@@ -1,0 +1,26 @@
+.popup__input_type_error {
+  /* border: 1px solid red; */
+  border-bottom-color: red;
+}
+
+.form__input-error_active {
+  opacity: 1;
+}
+
+.form__input-error {
+  color: red;
+}
+
+.popup__button_disabled {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  opacity: 20%;
+}
+
+.popup__button_disabled:hover {
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  opacity: 20%;
+}

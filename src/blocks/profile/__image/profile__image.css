@@ -7,6 +7,30 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+
+  position: relative;
+}
+
+
+.profile__avatar-change {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border: none;
+  transition: .5s;
+  background-image: url(../../../images/edit-icon.svg);
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.profile__avatar-change:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 740px) {
