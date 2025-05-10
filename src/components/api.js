@@ -19,12 +19,9 @@ const getInitialCards = () => {
 
     return Promise.reject(`Ошибка: ${res.status}`);
   })
-  .then(res => {
-    console.log(res);  //delete
-  })
 }
 
-// загрузка информации о пользователе?
+// загрузка информации о пользователе
 
 const getUserData = () => {
   return fetch(`${config.baseURL}/users/me`, {
@@ -37,12 +34,7 @@ const getUserData = () => {
 
     return Promise.reject(`Ошибка: ${res.status}`);
   })
-  .then(res => {
-    console.log(res); //delete
-  })
 }
-
-
 
 // редактирование профиля
 
@@ -94,11 +86,10 @@ const deleteMyCard = (cardId) => {
   })
 }
 
-
 // постановка и снятие лайка
 
 const putLikeCard = (cardId) => {
-  return fetch(`${config.baseURL}/cards/${cardId}`, {
+  return fetch(`${config.baseURL}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: config.headers
   }) 
@@ -112,7 +103,7 @@ const putLikeCard = (cardId) => {
 }
 
 const removeLikeCard = (cardId) => {
-  return fetch(`${config.baseURL}/cards/${cardId}`, {
+  return fetch(`${config.baseURL}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: config.headers
   }) 
@@ -126,7 +117,6 @@ const removeLikeCard = (cardId) => {
 }
 
 // обновление аватара
-
 
 const loadNewAvatar = (info) => {
   return fetch(`${config.baseURL}/users/me/avatar`, {
@@ -142,6 +132,5 @@ const loadNewAvatar = (info) => {
     return Promise.reject(`Ошибка: ${res.status}`);
   })
 }
-
 
 export { getInitialCards, getUserData, editProfile, addNewCard, deleteMyCard, putLikeCard, removeLikeCard, loadNewAvatar };
