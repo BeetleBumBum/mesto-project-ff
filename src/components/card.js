@@ -52,28 +52,6 @@ function likeCard(evt, card, likesQuantity) {
     })
     .catch(err => console.log(`Ошибка при снятии лайка: ${err}`));
 
-
-  // if (!isLiked) {
-  //   putLikeCard(card._id)
-  //     .then((updatedCard) => {
-  //       evt.target.classList.add("card__like-button_is-active");
-  //       likesQuantity.textContent = updatedCard.likes.length;
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка при добавлении лайка: ${err}`);
-  //     })
-  // } else {
-  //   removeLikeCard(card._id)
-  //     .then((updatedCard) => {
-  //       evt.target.classList.remove("card__like-button_is-active");
-  //       likesQuantity.textContent = updatedCard.likes.length;
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка при снятии лайка: ${err}`);
-  //     })
-  // }
-}
-
 // функция удаления карточки
 
 function deleteCard(cardId, cardElement) {
