@@ -50,6 +50,7 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
  }; 
 
 // Функция, которая добавляет класс с ошибкой
+
 const showInputError = (formElement, inputElement, errorMessage, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(validationConfig.inputErrorClass);
@@ -58,6 +59,7 @@ const showInputError = (formElement, inputElement, errorMessage, validationConfi
 };
  
  // Функция, которая удаляет класс с ошибкой
+ 
  const hideInputError = (formElement, inputElement, validationConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(validationConfig.inputErrorClass);

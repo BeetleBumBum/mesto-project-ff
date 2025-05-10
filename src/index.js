@@ -43,7 +43,6 @@ const profileDescription = document.querySelector(".profile__description");
 const modalTypeEdit = document.querySelector(".popup_type_edit");
 const btnEdit = document.querySelector(".profile__edit-button");
 const btnEditClose = document.querySelector(".popup_type_edit .popup__close");
-// const formElement = document.querySelector(".popup__form");
 
 function editModalInfo() {
    modalInputName.value = profileTitle.textContent;
