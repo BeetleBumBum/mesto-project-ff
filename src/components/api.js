@@ -6,19 +6,21 @@ const config = {
   }
 }
 
+const handleResponse = (res) => {
+  if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(`Ошибка: ${res.status}`);
+}
+
 // загрузка карточек с сервера
 
 const getInitialCards = () => {
   return fetch(`${config.baseURL}/cards`, {
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }
 
 // загрузка информации о пользователе
@@ -27,13 +29,7 @@ const getUserData = () => {
   return fetch(`${config.baseURL}/users/me`, {
     headers: config.headers
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }
 
 // редактирование профиля
@@ -44,13 +40,7 @@ const editProfile = (info) => {
     headers: config.headers,
     body: JSON.stringify(info)
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }  
 
 // добавление новой карточки
@@ -61,13 +51,7 @@ const addNewCard = (info) => {
     headers: config.headers,
     body: JSON.stringify(info)
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }
 
 // удаление карточки
@@ -77,13 +61,7 @@ const deleteMyCard = (cardId) => {
     method: 'DELETE',
     headers: config.headers
   }) 
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }
 
 // постановка и снятие лайка
@@ -93,13 +71,7 @@ const putLikeCard = (cardId) => {
     method: 'PUT',
     headers: config.headers
   }) 
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }
 
 const removeLikeCard = (cardId) => {
@@ -107,13 +79,7 @@ const removeLikeCard = (cardId) => {
     method: 'DELETE',
     headers: config.headers
   }) 
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }
 
 // обновление аватара
@@ -124,13 +90,7 @@ const loadNewAvatar = (info) => {
     headers: config.headers,
     body: JSON.stringify(info)
   })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  .then(handleResponse);
 }
 
 export { getInitialCards, getUserData, editProfile, addNewCard, deleteMyCard, putLikeCard, removeLikeCard, loadNewAvatar };

@@ -5,7 +5,7 @@ const enableValidation = (validationConfig) => {
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
   });
-    setEventListeners(formElement, validationConfig); //нужно ли то, что в скобках?
+    setEventListeners(formElement, validationConfig);
   });
  };
 

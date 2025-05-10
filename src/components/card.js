@@ -43,26 +43,35 @@ function createCard(card, deleteCard, likeCard, openImg, userId) {
 
 function likeCard(evt, card, likesQuantity) {
   const isLiked = evt.target.classList.contains("card__like-button_is-active");
+// Чтобы было меньше дублирования:
+  const likeMethod = isLiked ? removeLikeCard : putLikeCard;
+  likeMethod(card._id) 
+    .then((updatedCard) => { 
+      evt.target.classList.toggle("card__like-button_is-active"); 
+      likesQuantity.textContent = updatedCard.likes.length; 
+    })
+    .catch(err => console.log(`Ошибка при снятии лайка: ${err}`));
 
-  if (!isLiked) {
-    putLikeCard(card._id)
-      .then((updatedCard) => {
-        evt.target.classList.add("card__like-button_is-active");
-        likesQuantity.textContent = updatedCard.likes.length;
-      })
-      .catch((err) => {
-        console.log(`Ошибка при добавлении лайка: ${err}`);
-      })
-  } else {
-    removeLikeCard(card._id)
-      .then((updatedCard) => {
-        evt.target.classList.remove("card__like-button_is-active");
-        likesQuantity.textContent = updatedCard.likes.length;
-      })
-      .catch((err) => {
-        console.log(`Ошибка при снятии лайка: ${err}`);
-      })
-  }
+
+  // if (!isLiked) {
+  //   putLikeCard(card._id)
+  //     .then((updatedCard) => {
+  //       evt.target.classList.add("card__like-button_is-active");
+  //       likesQuantity.textContent = updatedCard.likes.length;
+  //     })
+  //     .catch((err) => {
+  //       console.log(`Ошибка при добавлении лайка: ${err}`);
+  //     })
+  // } else {
+  //   removeLikeCard(card._id)
+  //     .then((updatedCard) => {
+  //       evt.target.classList.remove("card__like-button_is-active");
+  //       likesQuantity.textContent = updatedCard.likes.length;
+  //     })
+  //     .catch((err) => {
+  //       console.log(`Ошибка при снятии лайка: ${err}`);
+  //     })
+  // }
 }
 
 // функция удаления карточки

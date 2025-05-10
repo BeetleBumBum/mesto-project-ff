@@ -4,7 +4,7 @@ import { openModal, closeModal } from "./components/modal.js";
 import { getInitialCards, getUserData, editProfile, addNewCard, loadNewAvatar } from "./components/api.js";
 import { clearValidation, enableValidation } from "./components/validation.js";
 
-export const placesList = document.querySelector(".places__list");
+const placesList = document.querySelector(".places__list");
 
 let userId = null;
 const modalTypeImage = document.querySelector(".popup_type_image");
@@ -44,7 +44,7 @@ const modalTypeEdit = document.querySelector(".popup_type_edit");
 const btnEdit = document.querySelector(".profile__edit-button");
 const btnEditClose = document.querySelector(".popup_type_edit .popup__close");
 
-function editModalInfo() {
+function fillEditInfoModal() {
    modalInputName.value = profileTitle.textContent;
    modalInputJob.value = profileDescription.textContent;
  };
@@ -67,12 +67,12 @@ function renameProfileFormSubmit(evt) {
     console.log(`Ошибка изменения профиля: ${err}`);
   })
   .finally(() => {
-    btnSubmit.textContent = 'Сохранить'; //почему так??
+    btnSubmit.textContent = 'Сохранить';
   })
 };
 
 btnEdit.addEventListener("click", function() {
-  editModalInfo();
+  fillEditInfoModal();
   clearValidation(modalTypeEdit, validationConfig);
   openModal(modalTypeEdit);
 });
@@ -113,7 +113,6 @@ formNewPlace.addEventListener("submit", function(evt) {
       const cardElement = createCard(newCard, deleteCard, likeCard, openImage, userId);
       placesList.prepend(cardElement);
       formNewPlace.reset();
-      clearValidation(formNewPlace, validationConfig);
       closeModal(modalTypeNewCard);
     })
     .catch((err) => {
